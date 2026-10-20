@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn with Bisma - Neon Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@400;700;900&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Lobster Two",sans-serif;scroll-behavior:smooth;}
+    body{background:#050505;color:#eee;padding-top:70px;overflow-x:hidden;background-image:radial-gradient(circle at 20% 30%, rgba(138,43,226,0.15) 0%, transparent 60%), radial-gradient(circle at 80% 70%, rgba(0,255,255,0.15) 0%, transparent 60%);}
+    .navbar{display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.98);padding:15px 30px;border-bottom:2px solid #0ff;position:fixed;width:100%;top:0;left:0;z-index:1000;backdrop-filter:blur(10px);}
+    .logo{color:#0ff;font-size:22px;font-weight:bold;text-shadow:0 0 10px #0ff,0 0 20px #0ff;}
+    #menu-toggle{display:none;}
+    .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;margin-left:auto;z-index:1002;padding:8px;position:fixed;top:15px;right:20px;}
+    .hamburger span{width:28px;height:3px;background:#0ff;border-radius:3px;transition:0.4s;box-shadow:0 0 8px #0ff;display:block;}
+    .nav-menu{display:flex;list-style:none;gap:30px;margin-left:auto;}
+    .nav-menu a{color:white;text-decoration:none;font-size:16px;font-weight:500;transition:0.3s;}
+    .nav-menu a:hover,.nav-menu a.active{color:#0ff;text-shadow:0 0 10px #0ff;}
+    .hero{text-align:center;padding:120px 20px;background:linear-gradient(120deg,#38bdf8,#818cf8,#c084fc);color:#0f172a;}
+    .hero h1{font-size:55px;animation:glow 2s infinite alternate;}
+    @keyframes glow{from{text-shadow:0 0 10px #fff;}to{text-shadow:0 0 30px #fff;}}
+    .heading{text-align:center;font-size:42px;margin:60px 0 20px;color:#0ff;text-shadow:0 0 15px #0ff;}
+    .cards-home{display:flex;justify-content:center;gap:30px;padding:20px 8% 40px;flex-wrap:wrap;}
+    .card-home{background:#111;padding:30px;border-radius:15px;width:320px;text-align:center;border:1px solid #333;transition:0.4s;box-shadow:0 0 15px rgba(0,240,255,0.2);}
+    .card-home:hover{transform:translateY(-10px);box-shadow:0 0 30px rgba(0,240,255,0.5);border-color:#0ff;}
+    .btn{padding:12px 28px;background:transparent;border:2px solid #0ff;color:#0ff;border-radius:8px;font-weight:700;margin-top:15px;transition:0.3s;cursor:pointer;box-shadow:0 0 10px rgba(0,240,255,0.3);}
+    .btn:hover{background:#0ff;color:#000;box-shadow:0 0 25px #0ff;transform:scale(1.05);}
+    .spinner{width:60px;height:60px;border:6px solid #334155;border-top:6px solid #38bdf8;border-radius:50%;animation:spin 1s linear infinite;margin:20px auto;}
+    @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+    .intro-section{text-align:center;padding:60px 20px;background:#111;}
+    .intro-para{font-size:1.1rem;color:#aaa;max-width:700px;margin:0 auto;line-height:1.8;}
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;padding:50px 40px;max-width:1200px;margin:0 auto;}
+    .card{background:#111;padding:20px;border-radius:12px;box-shadow:0 0 20px rgba(255,77,255,0.3);border:1px solid #333;text-align:center;transition:0.3s;}
+    .card:hover{transform:translateY(-8px);box-shadow:0 0 30px rgba(0,240,255,0.5);}
+    .card img{width:100%;height:180px;object-fit:cover;border-radius:10px;margin-bottom:15px;border:1px solid #ff4dff;}
+    .card h3{color:#0ff;margin-bottom:10px;}
+    .card p{color:#bbb;margin-bottom:15px;font-size:15px;}
+    .gradient-box{padding:15px;background:linear-gradient(45deg,#ff4dff,#00f0ff);color:#000;font-weight:bold;border-radius:8px;transition:0.5s;cursor:pointer;}
+    .glow-text{font-size:1.5rem;color:#eee;transition:0.3s;cursor:pointer;}
+    .glow-text:hover{color:#ff4dff;text-shadow:0 0 10px #ff4dff,0 0 20px #ff4dff;}
+    .pulse-btn{padding:12px 30px;background:#00f0ff;color:#000;border:none;border-radius:8px;cursor:pointer;font-weight:bold;animation:pulse 1.5s infinite;}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,240,255,0.7);}70%{box-shadow:0 0 0 15px rgba(0,240,255,0);}100%{box-shadow:0 0 0 0 rgba(0,240,255,0);}}
+    .glitch-text{font-size:2rem;color:#ff4dff;position:relative;cursor:pointer;font-weight:bold;letter-spacing:2px;}
+    .glitch-text:hover::before{content:attr(data-text);position:absolute;top:0;left:0;width:100%;color:#00f0ff;animation:glitch-1 0.3s infinite;}
+    @keyframes glitch-1{0%{transform:translate(0);}20%{transform:translate(-3px,3px);}80%{transform:translate(3px,-3px);}100%{transform:translate(0);}}
+    .about-container{max-width:1100px;margin:50px auto;padding:20px;display:flex;gap:40px;align-items:center;flex-wrap:wrap;}
+    .about-text{flex:1;min-width:300px;}
+    .about-para{font-size:16px;line-height:1.8;margin-bottom:15px;color:#ccc;}
+    .about-image{flex:1;min-width:300px;}
+    .about-image img{width:100%;border-radius:15px;border:2px solid #00f0ff;box-shadow:0 0 25px rgba(0,240,255,0.5);}
+    .about-highlight{background:#111;padding:30px;border-radius:15px;border:1px solid #ff4dff;box-shadow:0 0 20px rgba(255,77,255,0.3);margin:40px auto;max-width:1100px;}
+    .about-highlight h3{color:#0ff;margin-bottom:15px;text-shadow:0 0 8px #0ff;}
+    .gallery-section{padding:80px 20px;text-align:center;max-width:1300px;margin:auto;}
+    .gallery-section h1{font-size:50px;color:#e0f7ff;text-shadow:0 0 10px #00ffff,0 0 20px #00ffff,0 0 30px #8a2be2;margin-bottom:15px;}
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;perspective:1000px;margin-top:40px;}
+    .gallery-card{background:rgba(0,255,255,0.05);backdrop-filter:blur(15px);border:1px solid rgba(138,43,226,0.3);border-radius:25px;padding:25px;box-shadow:0 8px 32px 0 rgba(138,43,226,0.2);transition:0.5s;transform:rotateY(-5deg) rotateX(5deg);text-align:left;}
+    .gallery-card:hover{transform:rotateY(0deg) rotateX(0deg) translateY(-15px) scale(1.03);box-shadow:0 15px 60px 0 rgba(0,255,255,0.7);border:1px solid rgba(0,255,255,0.9);}
+    .coming-soon{width:100%;height:200px;border-radius:15px;margin-bottom:25px;position:relative;overflow:hidden;border:2px solid rgba(0,255,255,0.5);background:linear-gradient(135deg,#8a2be2 0%,#00ffff 100%);}
+    .coming-soon img{width:100%;height:100%;object-fit:cover;filter:blur(20px) brightness(0.3);opacity:0;transition:0.6s;}
+    .upload-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-weight:900;font-size:18px;color:#fff;text-shadow:0 0 10px #8a2be2;text-align:center;}
+    .coming-soon:hover img{filter:blur(5px) brightness(0.75);opacity:1;transform:scale(1);}
+    .gallery-card h3{color:#00ffff;text-shadow:0 0 10px #00ffff;font-size:22px;margin-bottom:10px;}
+    .gallery-card p{color:#ddf5ff;font-size:15px;line-height:1.6;}
+    .contact-section{padding:80px 20px;text-align:center;max-width:1200px;margin:auto;}
+    .contact-section h1{font-size:50px;color:#e0f7ff;text-shadow:0 0 10px #00ffff,0 0 20px #00ffff,0 0 30px #8a2be2;margin-bottom:15px;}
+    .contact-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:40px;margin-top:40px;text-align:left;}
+    .contact-card{background:rgba(0,255,255,0.05);backdrop-filter:blur(15px);border:1px solid rgba(138,43,226,0.3);border-radius:25px;padding:40px;box-shadow:0 8px 32px 0 rgba(138,43,226,0.2);transition:0.5s;}
+    .contact-card:hover{transform:translateY(-10px);box-shadow:0 15px 60px 0 rgba(0,255,255,0.7);}
+    .contact-card h3{color:#00ffff;text-shadow:0 0 10px #00ffff;font-size:26px;margin-bottom:25px;}
+    .input-group{position:relative;margin-bottom:20px;}
+    .input-group i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#00ffff;font-size:18px;}
+    .input-group textarea ~ i{top:20px;transform:none;}
+    .input-group input,.input-group textarea{width:100%;padding:15px 15px 15px 45px;background:rgba(138,43,226,0.1);border:2px solid rgba(0,255,255,0.3);border-radius:12px;color:#fff;font-size:16px;outline:none;transition:0.3s;}
+    .input-group input:focus,.input-group textarea:focus{border:2px solid #00ffff;box-shadow:0 0 20px rgba(0,255,255,0.6);}
+    .neon-btn{width:100%;padding:15px;background:linear-gradient(90deg,#8a2be2,#00ffff);border:none;border-radius:12px;color:#fff;font-size:18px;font-weight:700;cursor:pointer;transition:0.4s;box-shadow:0 0 15px rgba(138,43,226,0.5);}
+    .neon-btn:hover{transform:scale(1.05);box-shadow:0 0 30px #8a2be2,0 0 50px #00ffff;}
+    .info-item{display:flex;align-items:center;gap:15px;margin-bottom:20px;}
+    .info-item i{font-size:22px;color:#00ffff;text-shadow:0 0 10px #00ffff;}
+    .info-item p{font-size:18px;color:#ddf5ff;}
+    .social-icons{display:flex;gap:20px;margin-top:10px;}
+    .social-icons a{width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:rgba(138,43,226,0.2);border:2px solid rgba(0,255,255,0.5);border-radius:50%;color:#00ffff;font-size:22px;transition:0.3s;}
+    .social-icons a:hover{background:linear-gradient(135deg,#8a2be2,#00ffff);color:#fff;transform:translateY(-5px);box-shadow:0 0 20px #00ffff;}
+    footer{background:rgba(10,10,15,0.85);backdrop-filter:blur(15px);border-top:2px solid #00ffff;text-align:center;padding:25px;margin-top:80px;box-shadow:0 -5px 30px rgba(0,255,255,0.6);}
+    footer p{color:#00ffff;font-size:16px;text-shadow:0 0 10px #00ffff;}
+    @media(max-width:768px){.hamburger{display:flex;}.nav-menu{position:fixed;top:60px;right:-100%;flex-direction:column;background:#0a0a0a;width:70%;height:calc(100vh - 60px);text-align:left;padding:40px 30px;gap:25px;transition:0.4s ease;border-left:2px solid #0ff;z-index:1000;}#menu-toggle:checked ~ .nav-menu{right:0;}#menu-toggle:checked ~ .hamburger span:nth-child(1){transform:rotate(45deg) translate(6px,6px);}#menu-toggle:checked ~ .hamburger span:nth-child(2){opacity:0;}#menu-toggle:checked ~ .hamburger span:nth-child(3){transform:rotate(-45deg) translate(7px,-6px);}.hero h1{font-size:32px;}.about-container{flex-direction:column;} }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">Learn with Bisma</div>
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="hamburger"><span></span><span></span><span></span></label>
+  <ul class="nav-menu">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#playground">Playground</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="home" class="hero">
+  <h1>Welcome To The Learn With Bisma</h1>
+  <p>Master HTML & CSS through Simple And Creative Project</p>
+</section>
+
+<h2 class="heading">What I Learned</h2>
+<section class="cards-home">
+  <div class="card-home">
+    <h3>Hover Effects</h3>
+    <p>See The Magic When You Hover Over Button. Created Using CSS, No Javascript</p>
+    <button class="btn">Hover Me</button>
+  </div>
+  <div class="card-home">
+    <h3>CSS Animations</h3>
+    <p>I Created a Loading Spinner And Glow Effect Using @keyframes And CSS Transitions.</p>
+    <div class="spinner"></div>
+  </div>
+  <div class="card-home">
+    <h3>Fully Responsive</h3>
+    <p>This Website Works Perfectly On Mobile, Tablet And Desktop devices,</p>
+    <button class="btn">Resize Window</button>
+  </div>
+</section>
+
+<section id="playground">
+  <div class="intro-section">
+    <h2 class="heading">CSS Playground - Live Demos</h2>
+    <p class="intro-para">Welcome to the Playground! Here you will learn CSS by doing. Every demo below is 100% CSS. Just hover, click and see the magic.</p>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><img src="../images/play 1.jpeg" alt=""><h3>Demo 1: Glow Button</h3><p>Hover over the button to see the glow effect. Pure CSS.</p><button class="btn">Click Me</button></div>
+    <div class="card"><img src="../images/play.jpeg" alt=""><h3>Demo 2: Loading Spinner</h3><p>This smooth rotating loader is created using only CSS animations.</p><div class="spinner"></div></div>
+    <div class="card"><img src="../images/play 3.jpeg" alt=""><h3>Demo 3: Card Lift Effect</h3><p>Move your mouse over this card. It will lift up with smooth shadow.</p></div>
+    <div class="card"><img src="../images/play 4.jpeg" alt=""><h3>Demo 4: Animated Gradient</h3><p>Hover to see a beautiful animated gradient background effect.</p><div class="gradient-box">Hover Me</div></div>
+    <div class="card"><img src="../images/play 5.jpeg" alt=""><h3>Demo 5: Text Shadow</h3><p>Hover over the text below to see a glowing text shadow.</p><h4 class="glow-text">Glow Text</h4></div>
+    <div class="card"><img src="../images/play 6.jpeg" alt=""><h3>Demo 6: Pulse Button</h3><p>Hover over this button and watch it pulse with a neon glow</p><button class="pulse-btn">Click Me</button></div>
+    <div class="card"><img src="../images/play 7.jpeg" alt=""><h3>Demo 7: Glitch Text Effect</h3><p>Hover to see a cool cyberpunk glitch effect on the text</p><h2 class="glitch-text" data-text="GLITCH">GLITCH</h2></div>
+  </div>
+</section>
+
+<section id="about">
+  <h2 class="heading">About CSS Playground</h2>
+  <div class="about-container">
+    <div class="about-text">
+      <p class="about-para">Welcome to CSS Playground! This is a creative space where we experiment with modern CSS designs, animations, and neon effects. Our goal is to make learning CSS fun, visual, and interactive.</p>
+      <p class="about-para">Here you will find clean code, beautiful layouts, and real-world examples. Whether you are a beginner or a pro, CSS Playground helps you build stunning websites with confidence.</p>
+    </div>
+    <div class="about-image"><img src="../images/about 1.jpeg" alt="Coding"></div>
+  </div>
+  <div class="about-highlight">
+    <h3>What We Do</h3>
+    <ul style="list-style:none;padding:0;">
+      <li>✨ Create modern and responsive CSS designs</li>
+      <li>💡 Share easy tutorials and code snippets</li>
+      <li>🚀 Build a community of creative developers</li>
+    </ul>
+  </div>
+</section>
+
+<section id="gallery" class="gallery-section">
+  <h1>My Neon Gallery</h1>
+  <p>Hover over cards to reveal the magic ✨</p>
+  <div class="gallery-grid">
+    <div class="gallery-card"><div class="coming-soon"><span class="upload-text"><i class="fas fa-upload"></i>COMING SOON</span><img src="../images/galler 1.jpeg" alt=""></div><h3>Neon Button Design</h3><p>A glowing neon button with smooth hover effects and cyberpunk vibe.</p></div>
+    <div class="gallery-card"><div class="coming-soon"><span class="upload-text"><i class="fas fa-magic"></i>COMING SOON</span><img src="../images/galler 2.jpeg" alt=""></div><h3>Glassmorphism Card</h3><p>Modern glass effect card with blur background and neon border.</p></div>
+    <div class="gallery-card"><div class="coming-soon"><span class="upload-text"><i class="fas fa-code"></i>COMING SOON</span><img src="../images/galler 3.jpeg" alt=""></div><h3>Animated Background</h3><p>Gradient animated background with smooth transitions.</p></div>
+    <div class="gallery-card"><div class="coming-soon"><span class="upload-text"><i class="fas fa-rocket"></i>COMING SOON</span><img src="../images/galler  4.jpeg" alt=""></div><h3>Loading Animation</h3><p>Creative loading spinner with neon glow effects.</p></div>
+    <div class="gallery-card"><div class="coming-soon"><span class="upload-text"><i class="fas fa-palette"></i>COMING SOON</span><img src="../images/galler 5.jpeg" alt=""></div><h3>Color Palette UI</h3><p>Beautiful color picker interface with hover animations.</p></div>
+    <div class="gallery-card"><div class="coming-soon"><span class="upload-text"><i class="fas fa-gem"></i>COMING SOON</span><img src="../images/galler 6.jpeg" alt=""></div><h3>3D Hover Effect</h3><p>Tilt and 3D perspective card with mouse tracking.</p></div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <h1>Get In Touch</h1>
+  <p>Hover over cards to reveal the magic</p>
+  <div class="contact-container">
+    <div class="contact-card">
+      <h3>Send Me A Message</h3>
+      <form>
+        <div class="input-group"><i class="fa-solid fa-user"></i><input type="text" placeholder="Your Name" required></div>
+        <div class="input-group"><i class="fa-solid fa-envelope"></i><input type="email" placeholder="Your Email" required></div>
+        <div class="input-group"><i class="fa-solid fa-message"></i><textarea placeholder="Your Message" rows="5" required></textarea></div>
+        <button type="submit" class="neon-btn">Send Message</button>
+      </form>
+    </div>
+    <div class="contact-card">
+      <h3>Contact Info</h3>
+      <div class="info-item"><i class="fa-solid fa-location-dot"></i><p>Karachi, Pakistan</p></div>
+      <div class="info-item"><i class="fa-solid fa-phone"></i><p>+92 00 0000000</p></div>
+      <div class="info-item"><i class="fa-solid fa-envelope"></i><p>bismafatima450@gmail.com</p></div>
+      <h3 style="margin-top:30px;">Follow Me</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-github"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><p>© 2026 Learn With Bisma | DIT Assignment Project | Neon Portfolio Made with 💖</p></footer>
+
+<script>
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav-menu a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { const top = s.offsetTop; if (pageYOffset >= top - 100) current = s.getAttribute('id'); });
+  navLinks.forEach(a => { a.classList.remove('active'); if (a.getAttribute('href') === '#' + current) a.classList.add('active'); });
+});
+document.querySelectorAll('.nav-menu a').forEach(link => {
+  link.addEventListener('click', () => { document.getElementById('menu-toggle').checked = false; });
+});
+</script>
+</body>
+</html>
